@@ -9,7 +9,7 @@ import os
 
 logging_str = "[%(asctime)s : %(levelname)s : %(module)s] : %(message)s"
 log_dirs = "logs"
-create_directory(dirs = [log_dirs])
+os.makedirs(log_dirs, exist_ok=True)
 logging.basicConfig(filename= os.path.join(log_dirs, "running_logs.log"), 
 level= logging.INFO,format= logging_str, filemode= 'a' )
 
