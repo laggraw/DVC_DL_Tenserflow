@@ -6,6 +6,14 @@ import pandas as pd
 from tqdm import tqdm
 import os
 
+
+logging_str = "[%(asctime)s : %(levelname)s : %(module)s] : %(message)s"
+log_dirs = "logs"
+create_directory(dirs = [log_dirs])
+logging.basicConfig(filename= os.path.join(log_dirs, "running_logs.log"), 
+level= logging.INFO,format= logging_str, filemode= 'a' )
+
+
 def copy_file(source_download_dir, local_data_dir):
     list_of_files = os.listdir(source_download_dir)
     N = len(list_of_files)
@@ -20,7 +28,7 @@ def get_data(config_path):
     source_download_dirs = config["source_download_dirs"]
     local_data_dirs = config["local_data_dirs"]
 
-    for source_download_dir, local_data_dir in tqdm(zip(source_download_dirs, local_data_dirs), total=2, desc= "list of folders", colour="red"):
+    for source_download_dir, local_data_dir in tqdm(zip(source_download_dirs, local_data_dirs), total=2, desc= "list of folders", colour="blue"):
         create_directory([local_data_dir])
         copy_file(source_download_dir, local_data_dir)
 
@@ -31,4 +39,10 @@ if __name__ == '__main__':
 
     parsed_args = args.parse_args()
 
-    get_data(config_path=parsed_args.config)
+    try:
+        logging.info("Stage 01 started")
+        get_data(config_path=parsed_args.config)
+        logging.info("Stage 01 completed, all the data saved in local")
+    except Exception as e : 
+        logging.exception(e)
+        raise e
