@@ -139,3 +139,5 @@ logs/*
 config/secrets.yaml
 artifacts/base_model/updated_VGG16_base_model.h5
 artifacts/base_model/VGG16_base_model.h5
+artifacts/callbacks/checkpoint_cb.cb
+artifacts/callbacks/tensorboard_cb.cb
