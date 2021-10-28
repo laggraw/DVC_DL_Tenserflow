@@ -96,6 +96,7 @@ shtab==1.4.1
 six==1.16.0
 smmap==4.0.0
 speedcopy==2.1.0
+scipy==1.7.1
 tabulate==0.8.9
 tensorboard==2.6.0
 tensorboard-data-server==0.6.1
