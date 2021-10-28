@@ -1,6 +1,7 @@
 from src.utils.all_utils import read_yaml, create_directory
 from src.utils.models import load_full_model
 from src.utils.callbacks import get_callbacks
+from src.utils.data_management import train_valid_generator
 import argparse
 import logging
 import os
@@ -30,6 +31,14 @@ def train_model(config_path,params_path):
     callbacks = get_callbacks(callback_dir_path)
 
 
+    train_generator, valid_generator = train_valid_generator(
+
+        data_dir = artifacts['DATA_DIR'],
+        IMAGE_SIZE = tuple(params['IMAGE_SIZE'][:-1]),
+        BATCH_SIZE = params['BATCH_SIZE'],
+        do_data_agumentation = params['AGUMENTATION']
+    )
+
 if __name__ == '__main__':
     args = argparse.ArgumentParser()
 
@@ -41,7 +50,7 @@ if __name__ == '__main__':
     try:
         logging.info(">>>>>>>>>>>>>Stage 04 started>>>>>>>>>>>>>")
         train_model(config_path=parsed_args.config,params_path=parsed_args.params) 
-        logging.info(">>>>>>>>>>>>>Stage 04 completed, training completed and model saved>>>>>>>>>>>>>")
+        logging.info(">>>>>>>>>>>>>Stage 04 completed, training completed and model saved>>>>>>>>>>>>>\n")
     except Exception as e : 
         logging.exception(e)
         raise e

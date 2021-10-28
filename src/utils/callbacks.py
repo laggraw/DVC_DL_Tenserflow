@@ -16,7 +16,8 @@ def get_callbacks(callback_dir_path):
     callbacks = [
         joblib.load(path) for path in callback_path
         ]
-
+    logging.info(f"Saved callbacks are loaded from path: {callback_dir_path}")
+    
     return callbacks
     
 def  create_and_save_tensorboard_callbacks(callbacks_dir,tensorboard_log_dir):
