@@ -2,6 +2,13 @@ import tensorflow as tf
 import os
 import logging
 
+
+def load_full_model(untrained_full_model_path):
+    model = tf.keras.models.load_model(untrained_full_model_path)
+    logging.info(f"Untrained model has been been uploaded from {untrained_full_model_path}")
+    return model
+
+
 def get_VGG_16_model(input_shape,model_path):
     model = tf.keras.applications.vgg16.VGG16(input_shape = input_shape, 
     weights = "imagenet", include_top = False,
