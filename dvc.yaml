@@ -56,7 +56,8 @@ stages:
       - EPOCHS
     outs:
       - artifacts/model
-    
+      - artifacts/tensorboard_log_dir
+      - artifacts/checkpoints/ckpt_model.h5
   
 
 
